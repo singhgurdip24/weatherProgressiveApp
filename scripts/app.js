@@ -61,9 +61,14 @@
     var selected = select.options[select.selectedIndex];
     var key = selected.value;
     var label = selected.textContent;
+    if (!app.selectedCities) {
+      app.selectedCities = [];
+    }
     // TODO init the app.selectedCities array here
     app.getForecast(key, label);
     // TODO push the selected city to the array and save here
+    app.selectedCities.push({key: key, label: label});
+    app.saveSelectedCities();
     app.toggleAddDialog(false);
   });
 
@@ -192,7 +197,7 @@
         }
       } else {
         // Return the initial weather forecast since no data is available.
-        app.updateForecastCard(initialWeatherForecast);
+        //app.updateForecastCard(initialWeatherForecast);
       }
     };
     request.open('GET', url);
